@@ -1,0 +1,13 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Optional: development command Netlify can use for the Netlify CLI local dev
+[dev]
+  command = "npm run dev"
+
+# Single page app routing: serve index.html for all routes
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
