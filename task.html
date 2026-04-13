@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Track · AI-Augmented Take-Home Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0f0e0c;
+    --paper: #f5f2ec;
+    --cream: #ede9e0;
+    --accent: #c84b2f;
+    --accent-light: #f0d5ce;
+    --muted: #7a756c;
+    --border: #d6d0c4;
+    --green: #2d6a4f;
+    --green-bg: #d8f3dc;
+    --amber: #92400e;
+    --amber-bg: #fef3c7;
+    --blue: #1e3a5f;
+    --blue-bg: #dbeafe;
+    --purple: #5b21b6;
+    --purple-bg: #e9d5ff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  nav {
+    display: flex;
+    gap: 32px;
+  }
+
+  nav a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  nav a:hover { color: var(--ink); }
+
+  .badge-header {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    background: var(--accent);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 80px 48px 64px;
+    max-width: 900px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-eyebrow::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 40px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(40px, 5vw, 62px);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .meta-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 4px;
+    background: var(--cream);
+  }
+
+  .meta-pill strong { color: var(--ink); font-weight: 500; }
+
+  .meta-pill.ai {
+    background: var(--purple-bg);
+    border-color: var(--purple);
+    color: var(--purple);
+  }
+
+  .meta-pill.ai strong { color: var(--purple); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 48px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    padding: 64px 48px;
+    max-width: 960px;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 60px;
+  }
+
+  h2 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .section-intro {
+    color: var(--muted);
+    margin-bottom: 36px;
+    max-width: 560px;
+  }
+
+  /* ── AI POLICY BOX ── */
+  .ai-policy-card {
+    background: var(--purple-bg);
+    border: 1px solid var(--purple);
+    color: var(--purple);
+    padding: 36px 40px;
+    border-radius: 6px;
+    margin-bottom: 32px;
+  }
+
+  .ai-policy-card h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 22px;
+    margin-bottom: 16px;
+    color: var(--purple);
+  }
+
+  .ai-policy-card p {
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 12px;
+    color: #4c1d95;
+  }
+
+  .ai-policy-card strong {
+    font-weight: 600;
+  }
+
+  .ai-policy-card ul {
+    margin: 16px 0;
+    padding-left: 20px;
+  }
+
+  .ai-policy-card li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  /* ── PROBLEM BOX ── */
+  .problem-card {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 36px 40px;
+    border-radius: 6px;
+    margin-bottom: 32px;
+  }
+
+  .problem-card p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #c8c3b8;
+    max-width: 640px;
+  }
+
+  .problem-card p + p { margin-top: 14px; }
+
+  /* ── SCREENS ── */
+  .screens-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .screen-card {
+    background: white;
+    padding: 28px 28px 32px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .screen-card:nth-child(2n) { border-right: none; }
+  .screen-card:nth-child(3), .screen-card:nth-child(4) { border-bottom: none; }
+
+  .screen-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+
+  .screen-card h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 19px;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+
+  .screen-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ── REQUIREMENTS ── */
+  .req-group { margin-bottom: 32px; }
+
+  .req-group-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 3px;
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+
+  .req-group-label.backend { background: var(--blue-bg); color: var(--blue); }
+  .req-group-label.frontend { background: var(--green-bg); color: var(--green); }
+  .req-group-label.both { background: var(--amber-bg); color: var(--amber); }
+  .req-group-label.bonus {
+    background: var(--cream);
+    color: var(--muted);
+    border: 1px dashed var(--border);
+  }
+  .req-group-label.ai { background: var(--purple-bg); color: var(--purple); }
+
+  .req-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .req-list li {
+    display: flex;
+    gap: 14px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #3a3730;
+    padding: 12px 16px;
+    background: var(--cream);
+    border-radius: 4px;
+    border-left: 2px solid transparent;
+  }
+
+  .req-group.backend .req-list li { border-left-color: var(--blue); }
+  .req-group.frontend .req-list li { border-left-color: var(--green); }
+  .req-group.both .req-list li { border-left-color: #d97706; }
+  .req-group.bonus .req-list li { border-left-color: var(--border); }
+  .req-group.ai .req-list li { border-left-color: var(--purple); background: var(--purple-bg); }
+
+  .req-list li::before {
+    content: '→';
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .timeline-item {
+    padding: 24px 22px;
+    border-right: 1px solid var(--border);
+    background: white;
+  }
+
+  .timeline-item:last-child { border-right: none; }
+
+  .timeline-hrs {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .timeline-phase {
+    font-family: 'Instrument Serif', serif;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .timeline-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── TRANSITIONS ── */
+  .transition-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+
+  .transition-table th {
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .transition-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .transition-table tr:last-child td { border-bottom: none; }
+
+  .transition-table tr:nth-child(even) td { background: var(--cream); }
+
+  .stage-from {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--ink);
+  }
+
+  .stage-arrow { color: var(--muted); padding: 0 4px; }
+
+  .allowed-to {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .stage-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    background: var(--green-bg);
+    color: var(--green);
+  }
+
+  .stage-tag.reject {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+
+  /* ── SUBMISSION ── */
+  .submit-card {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 36px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .submit-card h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 14px;
+  }
+
+  .submit-card p, .submit-card li {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .submit-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .submit-card li::before {
+    content: '↳ ';
+    font-family: 'DM Mono', monospace;
+    color: var(--accent);
+    font-size: 12px;
+  }
+
+  /* ── AI DOCS BOX ── */
+  .ai-docs-box {
+    background: white;
+    border: 2px solid var(--purple);
+    border-radius: 6px;
+    padding: 28px 32px;
+    margin: 24px 0;
+  }
+
+  .ai-docs-box h4 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 18px;
+    color: var(--purple);
+    margin-bottom: 16px;
+  }
+
+  .ai-docs-box ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ai-docs-box li {
+    display: flex;
+    gap: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .ai-docs-box li::before {
+    content: '✓';
+    font-family: 'DM Mono', monospace;
+    color: var(--purple);
+    font-weight: bold;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    header { position: static; }
+    .section { padding: 40px 48px; }
+    footer { margin-top: 20px; }
+  }
+
+  @media (max-width: 720px) {
+    header { padding: 0 20px; }
+    .hero, .section, .divider { padding-left: 20px; padding-right: 20px; }
+    .divider { margin: 0 20px; }
+    h1 { font-size: 36px; }
+    .screens-grid { grid-template-columns: 1fr; }
+    .timeline { grid-template-columns: 1fr 1fr; }
+    .submit-card { grid-template-columns: 1fr; }
+    nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <span class="logo">Company X · Hiring</span>
+  <nav>
+    <a href="#ai-policy">AI Policy</a>
+    <a href="#problem">Problem</a>
+    <a href="#requirements">Requirements</a>
+    <a href="#submit">Submit</a>
+  </nav>
+  <span class="badge-header">48 hrs</span>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Product Track · AI-Augmented Take-Home</div>
+  <h1>Candidate<br><em>Pipeline</em> System</h1>
+  <p class="hero-sub">
+    Build and deploy a full-stack recruitment pipeline using AI coding assistants. We evaluate how you direct, debug, and own AI-generated code — not just the final product.
+  </p>
+  <div class="meta-row">
+    <div class="meta-pill">⏱ <strong>48 hours</strong>&nbsp;from receipt</div>
+    <div class="meta-pill">⚛ <strong>React</strong>&nbsp;+ Node / Express</div>
+    <div class="meta-pill ai">🤖 <strong>AI Required</strong>&nbsp;Document your prompts</div>
+    <div class="meta-pill">🚀 <strong>Deployment</strong>&nbsp;Required</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- AI POLICY SECTION -->
+<div class="section" id="ai-policy">
+  <div class="section-label">00 · AI Policy</div>
+  <h2>How to Work With AI</h2>
+  <p class="section-intro">This assessment expects AI usage. What we evaluate is your ability to wield it skillfully.</p>
+
+  <div class="ai-policy-card">
+    <h3>🤖 AI Is Required — And Will Be Tested</h3>
+    <p>
+      You are <strong>required</strong> to use AI coding assistants (ChatGPT, Claude, Cursor, GitHub Copilot, etc.) to complete this project. We assume this will accelerate your development significantly.
+    </p>
+    <p>
+      However, your submission will be evaluated on:
+    </p>
+    <ul>
+      <li><strong>Quality of your prompts</strong> — Include a <code>PROMPTS.md</code> documenting key AI interactions</li>
+      <li><strong>Debugging and refinement</strong> — Show us where AI was wrong and how you fixed it</li>
+      <li><strong>Architectural ownership</strong> — Every decision must be defensible in the technical interview</li>
+    </ul>
+    <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(91, 33, 182, 0.2);">
+      <strong>⚠️ Red flag:</strong> Code you cannot explain in detail will be treated as academic dishonesty. The technical interview will probe deeply into your system's logic — surface-level understanding will not pass.
+    </p>
+  </div>
+
+  <div class="ai-docs-box">
+    <h4>Required AI Documentation Files</h4>
+    <ul>
+      <li><strong>PROMPTS.md</strong> — Key prompts you used, including initial scaffolding and critical refinements</li>
+      <li><strong>AI_REVIEW.md</strong> — Self-critique: 2 things AI did well, 2 you had to manually fix, 1 technical debt item</li>
+      <li><strong>README.md</strong> — Must explain which architectural decisions were AI-suggested vs. your overrides</li>
+    </ul>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PROBLEM -->
+<div class="section" id="problem">
+  <div class="section-label">01 · Context</div>
+  <h2>The Problem</h2>
+  <p class="section-intro">Understand this before you prompt your first line of code.</p>
+
+  <div class="problem-card">
+    <p>
+      Company X is actively hiring across multiple roles. Their entire recruitment process runs on spreadsheets and paper notes — hiring managers update a shared Excel file by hand, and there's no single source of truth.
+    </p>
+    <p>
+      The result: candidates fall through the cracks. Someone forgets to update a stage, an email never gets sent, or a promising CV gets buried in an inbox. By the time anyone notices, the candidate has moved on.
+    </p>
+    <p>
+      They need a simple web application where the hiring team can see every open role, drill into each one, and manage candidates through a visual pipeline — dragging cards from stage to stage as the process moves forward. Every action should be timestamped so nothing gets lost or forgotten.
+    </p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SCREENS -->
+<div class="section" id="screens">
+  <div class="section-label">02 · Screens</div>
+  <h2>What to Build</h2>
+  <p class="section-intro">Four screens. All four must be functional, connected to the real API, and deployed live.</p>
+
+  <div class="screens-grid">
+    <div class="screen-card">
+      <div class="screen-num">SCREEN 01</div>
+      <h3>Jobs Dashboard</h3>
+      <p>Lists all open positions. Each job card shows its title, department, and active candidate count. Clicking a job opens its pipeline.</p>
+    </div>
+    <div class="screen-card">
+      <div class="screen-num">SCREEN 02</div>
+      <h3>Candidate Pipeline</h3>
+      <p>A Kanban board scoped to one job. Five columns: <strong>Applied → Shortlisted → Interviewing → In Assessment → Accepted</strong>. Cards show photo + name and can be dragged between columns. Every move is saved and timestamped.</p>
+    </div>
+    <div class="screen-card">
+      <div class="screen-num">SCREEN 03</div>
+      <h3>Candidate Detail</h3>
+      <p>Clicking a card opens the full application — name, photo, role applied for, date applied, current stage, and a chronological history of every stage change.</p>
+    </div>
+    <div class="screen-card">
+      <div class="screen-num">SCREEN 04</div>
+      <h3>Rejected Archive</h3>
+      <p>A read-only page listing every rejected candidate: name, role, the stage they were rejected at, and exact date and time. Once rejected, a candidate cannot be dragged back into the pipeline.</p>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- REQUIREMENTS -->
+<div class="section" id="requirements">
+  <div class="section-label">03 · Requirements</div>
+  <h2>What's Expected</h2>
+  <p class="section-intro">Core requirements must be met. Bonus items are genuinely optional — a solid core beats a buggy everything.</p>
+
+  <div class="req-group ai">
+    <div class="req-group-label ai">AI & Documentation</div>
+    <ul class="req-list">
+      <li><strong>PROMPTS.md</strong> — Document your key AI prompts: initial scaffolding, data model decisions, drag-and-drop implementation, and any debugging sessions. Show the evolution, not just final prompts.</li>
+      <li><strong>AI_REVIEW.md</strong> — Critique your own codebase: 2 things the AI did well, 2 things you had to manually fix or rewrite, and 1 technical debt item you'd address next.</li>
+      <li><strong>Decision audit</strong> — In your README, explicitly note which architectural decisions were AI-suggested vs. your overrides. We want to see your judgment, not just AI output.</li>
+    </ul>
+  </div>
+
+  <div class="req-group backend">
+    <div class="req-group-label backend">Backend</div>
+    <ul class="req-list">
+      <li>REST API in Node.js / Express with consistent JSON responses throughout.</li>
+      <li>Data model covering <strong>Jobs</strong>, <strong>Candidates</strong>, <strong>Applications</strong> (the link between a candidate and a job), and a <strong>StageHistory</strong> log (every stage change, timestamped).</li>
+      <li>Core endpoints: list all jobs · get one job with candidates · get one application with full stage history · update a candidate's stage · list all rejected candidates.</li>
+      <li>Stage transition validation — the API must reject nonsensical moves (e.g. Accepted → Applied). Document your allowed transition map in the README.</li>
+    </ul>
+  </div>
+
+  <div class="req-group frontend">
+    <div class="req-group-label frontend">Frontend</div>
+    <ul class="req-list">
+      <li>React (preferred) or Vue. No UI library required — how you write CSS is part of the evaluation.</li>
+      <li>All four screens must be functional and connected to the real API. No hardcoded mock data at submission.</li>
+      <li>Drag-and-drop on the Kanban board must call the backend. Stage changes must persist — not just update local state.</li>
+      <li><strong>Deployment</strong> — Host your frontend on Vercel, Netlify, or similar. The API must be accessible (Render, Railway, Fly.io, etc.). Include live URLs in README.</li>
+    </ul>
+  </div>
+
+  <div class="req-group both">
+    <div class="req-group-label both">Both</div>
+    <ul class="req-list">
+      <li>Loading and error states — the UI must show when data is loading and handle API errors gracefully. Silent failures are not acceptable.</li>
+      <li>Date &amp; time tracking — every stage change records a precise timestamp. Application date and rejection date/time are always visible where relevant.</li>
+      <li>Environment configuration — Your README must clearly document all env vars. We will test your deployment.</li>
+    </ul>
+  </div>
+
+  <div class="req-group bonus">
+    <div class="req-group-label bonus">Bonus</div>
+    <ul class="req-list">
+      <li>Seed script with realistic dummy data (3+ jobs, 10+ candidates) — makes the demo far more compelling.</li>
+      <li>Optimistic UI on drag — the card moves immediately and rolls back if the API returns an error.</li>
+      <li>Any unit test, however small — validation logic, a stage transition check, anything that shows you thought about correctness.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- TRANSITION MAP -->
+<div class="section">
+  <div class="section-label">04 · Data</div>
+  <h2>Allowed Stage Transitions</h2>
+  <p class="section-intro">Your API must enforce this map. Document any deviations in your README.</p>
+
+  <table class="transition-table">
+    <thead>
+      <tr>
+        <th>From</th>
+        <th>May move to</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="stage-from">Applied</span></td>
+        <td>
+          <div class="allowed-to">
+            <span class="stage-tag">Shortlisted</span>
+            <span class="stage-tag reject">Rejected</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="stage-from">Shortlisted</span></td>
+        <td>
+          <div class="allowed-to">
+            <span class="stage-tag">Interviewing</span>
+            <span class="stage-tag reject">Rejected</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="stage-from">Interviewing</span></td>
+        <td>
+          <div class="allowed-to">
+            <span class="stage-tag">In Assessment</span>
+            <span class="stage-tag reject">Rejected</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="stage-from">In Assessment</span></td>
+        <td>
+          <div class="allowed-to">
+            <span class="stage-tag">Accepted</span>
+            <span class="stage-tag reject">Rejected</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td><span class="stage-from">Accepted</span></td>
+        <td><span style="font-size:13px;color:var(--muted);font-style:italic;">Terminal — no further moves</span></td>
+      </tr>
+      <tr>
+        <td><span class="stage-from">Rejected</span></td>
+        <td><span style="font-size:13px;color:var(--muted);font-style:italic;">Terminal — cannot re-enter pipeline</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="divider"></div>
+
+<!-- TIMELINE -->
+<div class="section">
+  <div class="section-label">05 · Timeline</div>
+  <h2>Suggested Pacing</h2>
+  <p class="section-intro">This is a guide, not a rule. AI will accelerate some phases but create debugging work in others.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-hrs">0 – 3 hrs</div>
+      <div class="timeline-phase">Design & Prompting</div>
+      <div class="timeline-desc">Sketch data model. Write initial AI prompts for scaffolding. Review AI output before accepting.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-hrs">3 – 12 hrs</div>
+      <div class="timeline-phase">Backend & Debug</div>
+      <div class="timeline-desc">Generate with AI, then manually review. Fix transition logic. Test endpoints. Write seed data.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-hrs">12 – 28 hrs</div>
+      <div class="timeline-phase">Frontend & Integration</div>
+      <div class="timeline-desc">Build screens with AI assistance. Manually implement drag-and-drop state management. Connect real API.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-hrs">28 – 40 hrs</div>
+      <div class="timeline-phase">Deploy & Document</div>
+      <div class="timeline-desc">Deploy to production. Fix CORS/env issues. Write PROMPTS.md, AI_REVIEW.md, and README.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-hrs">40 – 48 hrs</div>
+      <div class="timeline-phase">Polish & Verify</div>
+      <div class="timeline-desc">Test deployed version end-to-end. Verify error states. Prepare for technical interview.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SUBMISSION -->
+<div class="section" id="submit">
+  <div class="section-label">06 · Submission</div>
+  <h2>How to Submit</h2>
+  <p class="section-intro">A GitHub repo or ZIP. Two directories: <code style="font-family:'DM Mono',monospace;font-size:13px;background:var(--cream);padding:2px 6px;border-radius:2px;">frontend/</code> and <code style="font-family:'DM Mono',monospace;font-size:13px;background:var(--cream);padding:2px 6px;border-radius:2px;">backend/</code>. Must include live deployment URLs.</p>
+
+  <div class="submit-card">
+    <div>
+      <h3>Each README must cover</h3>
+      <ul>
+        <li>Live deployment URLs (frontend + API)</li>
+        <li>How to run it locally</li>
+        <li>Any environment variables required</li>
+        <li>Your key technical decisions and why</li>
+        <li>Which decisions were AI-suggested vs. your overrides</li>
+        <li>One thing you'd improve with more time</li>
+      </ul>
+    </div>
+    <div>
+      <h3>We evaluate on</h3>
+      <ul>
+        <li>Working deployed product (table stakes)</li>
+        <li>Quality of AI collaboration (PROMPTS.md)</li>
+        <li>Self-awareness (AI_REVIEW.md)</li>
+        <li>Code quality and structure</li>
+        <li>API design and correctness</li>
+        <li>UI polish and CSS craft</li>
+        <li>Error handling (not an afterthought)</li>
+        <li>README clarity — can we run it in 5 minutes?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ai-docs-box" style="margin-top: 32px;">
+    <h4>Required Files Checklist</h4>
+    <ul>
+      <li><strong>frontend/</strong> and <strong>backend/</strong> directories</li>
+      <li><strong>README.md</strong> with live URLs and decision audit</li>
+      <li><strong>PROMPTS.md</strong> documenting key AI interactions</li>
+      <li><strong>AI_REVIEW.md</strong> with self-critique</li>
+      <li><strong>.env.example</strong> files showing required environment variables</li>
+    </ul>
+  </div>
+
+  <div style="margin-top: 40px; padding: 24px; background: var(--cream); border-radius: 6px; border-left: 3px solid var(--accent);">
+    <p style="font-size: 14px; color: var(--muted); line-height: 1.7; margin: 0;">
+      <strong style="color: var(--ink);">Next Step:</strong> After submission, you will be invited to a technical interview where we will discuss your implementation in depth. Be prepared to explain every architectural decision, demonstrate your deployed application, and discuss how you collaborated with AI.
+    </p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Company X · Product Track · Internal Use Only</p>
+  <p>Assessment v3-AI · 2025</p>
+</footer>
+
+</body>
+</html>
